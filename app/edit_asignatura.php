@@ -1,6 +1,4 @@
 <?php
-
-
 session_start();
 
 $hostname = "db";
@@ -12,11 +10,16 @@ $conn = mysqli_connect($hostname, $username, $password, $db);
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
+
 $asignatura_id = $_POST['asignatura_id'];
 $dni = $_SESSION['dniUsuario'];
 
-$query ="SELECT nombre, descripcion, creditos, convocatorias_usadas, año FROM asignaturas WHERE id='$asignatura_id' AND dni= '$dni'";
-$result = mysqli_query($conn, $query);
+// Consulta parametrizada
+$query = "SELECT nombre, descripcion, creditos, convocatorias_usadas, año FROM asignaturas WHERE id=? AND dni=?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("ss", $asignatura_id, $dni);
+$stmt->execute();
+$result = $stmt->get_result();
 
 if ($result) {
     $asignatura = mysqli_fetch_assoc($result);
@@ -39,7 +42,7 @@ if ($result) {
 <div class="container">
     <h1>Editar una asignatura</h1>
     <form action="modify_asignatura.php" method="post">
-    	<input type="hidden" name="asignatura_id" value="<?php echo $asignatura_id; ?>">
+        <input type="hidden" name="asignatura_id" value="<?php echo $asignatura_id; ?>">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required value="<?php echo $asignatura['nombre']; ?>">
         <label for="descripcion">Descripción:</label>
@@ -55,4 +58,3 @@ if ($result) {
 </div>
 </body>
 </html>
-

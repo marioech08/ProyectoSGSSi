@@ -14,9 +14,12 @@ if (!$conn) {
 $asignatura_id = $_POST['asignatura_id'];
 $dni = $_SESSION['dniUsuario'];
 
-// Consulta SQL para eliminar la asignatura
-$sql = "DELETE FROM asignaturas WHERE id = '$asignatura_id' AND dni = '$dni'";
-$result = mysqli_query($conn, $sql);
+// Consulta parametrizada para eliminar la asignatura
+$query = "DELETE FROM asignaturas WHERE id = ? AND dni = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("ss", $asignatura_id, $dni);
+$stmt->execute();
+$result = $stmt->get_result();
 
 if ($result) {
     header('Location: dashboard.php');
@@ -24,6 +27,6 @@ if ($result) {
     header('Location: dashboard.php?error=delete_asignatura_failed');
 }
 
+$stmt->close();
 mysqli_close($conn);
 ?>
-

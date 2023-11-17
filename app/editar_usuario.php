@@ -14,7 +14,7 @@ if (!$conn) {
 }
 $dni = $_SESSION['dniUsuario'];
 
-$query = "SELECT nombre, apellidos, telefono, fechaNacimiento, password, salt FROM usuarios WHERE dni = ?";
+$query = "SELECT nombre, apellidos, telefono, fechaNacimiento, password FROM usuarios WHERE dni = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("s", $dni);
 $stmt->execute();

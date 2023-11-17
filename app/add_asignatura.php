@@ -1,6 +1,6 @@
 <?php
 session_start();
-// phpinfo();
+
 $hostname = "db";
 $username = "admin";
 $password = "test";
@@ -18,18 +18,18 @@ $convocatorias_usadas = $_POST['convocatorias_usadas'];
 $dni = $_SESSION['dniUsuario'];
 $año = $_POST['año'];
 
-$query = "INSERT INTO asignaturas (nombre, descripcion, creditos, convocatorias_usadas , año, dni) VALUES ('$nombre', '$descripcion', '$creditos', '$convocatorias_usadas', '$año', '$dni')";
-$result = mysqli_query($conn, $query);
+// Consulta parametrizada para insertar asignatura
+$query = "INSERT INTO asignaturas (nombre, descripcion, creditos, convocatorias_usadas, año, dni) VALUES (?, ?, ?, ?, ?, ?)";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("ssissi", $nombre, $descripcion, $creditos, $convocatorias_usadas, $año, $dni);
+$stmt->execute();
 
-if ($result) {
-
+if ($stmt->affected_rows > 0) {
     header('Location: dashboard.php');
 } else {
-
-    echo "Error al añadir: " . $conn->error;
-    
+    echo "Error al añadir: " . $stmt->error;
 }
 
+$stmt->close();
 mysqli_close($conn);
 ?>
-
