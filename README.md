@@ -1,19 +1,48 @@
+# Web: Portal de Asignaturas
 
-# Docker LAMP
-Linux + Apache + MariaDB (MySQL) + PHP 7.2 on Docker Compose. Mod_rewrite enabled by default.
+## Integrantes:
 
-## Instructions
+- Pablo Martinez Diez
+- Pablo Leclerc
+- Mario Echavarri
+- Eneko Uresandi
 
-Enter the following command to start your containers:
+## Como abrir el proyecto
+Clonamos el proyecto con:
+```bash
+$ git clone -b entrega_1 https://github.com/marioech08/ProyectoSGSSi
+```
+Situamos la terminal dentro de la carpeta donde esta el proyecto.
+
+Asegúrate de tener Docker instalado. Si no lo tienes, puedes instalarlo con el siguiente comando:
+```bash
+$ apt-get install docker
+```
+
+Crea la imagen llamada "web" ejecutando el siguiente comando:
+```bash
+$ docker build -t="web" .
+```
+
+Inicia los contenedores con el siguiente comando:
 ```bash
 $ docker-compose up -d
 ```
-
-To stop them, use this:
+Para comprobar que se te ha iniciado puedes ejecutar este comando:
 ```bash
-$ docker-compose stop
+$ docker ps
 ```
 
-Feel free to make pull requests and help to improve this.
+Abre tu navegador web y visita http://localhost:8890/.
 
-If you are looking for phpMyAdmin, take a look at [this](https://github.com/celsocelante/docker-lamp/issues/2).
+Inicia sesión con las siguientes credenciales:
+    Usuario: admin
+    Contraseña: test
+
+Haz clic en database y luego selecciona importar. Después, elige el archivo database.sql situado en la carpeta del proyecto. Esta base tiene un gmail:admin@gmail.com contraseña:12 con varias asignaturas añadidas.
+Accede a http://localhost:81/ en tu navegador.
+
+Si deseas detener el proyecto, abre otra terminal y ejecuta el siguiente comando:
+```bash
+$ docker-compose down
+```
