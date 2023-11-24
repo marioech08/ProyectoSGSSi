@@ -42,17 +42,17 @@ if ($result) {
 <div class="container">
     <h1>Editar una asignatura</h1>
     <form action="modify_asignatura.php" method="post">
-        <input type="hidden" name="asignatura_id" value="<?php echo $asignatura_id; ?>">
+        <input type="hidden" name="asignatura_id" value="<?php echo htmlspecialchars($asignatura_id); ?>">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required value="<?php echo $asignatura['nombre']; ?>">
+        <input type="text" id="nombre" name="nombre" required value="<?php echo htmlspecialchars($asignatura['nombre']); ?>">
         <label for="descripcion">Descripción:</label>
-        <input type="text" id="descripcion" name="descripcion" required value="<?php echo $asignatura['descripcion']; ?>">
+        <input type="text" id="descripcion" name="descripcion" required value="<?php echo htmlspecialchars($asignatura['descripcion']); ?>">
         <label for="creditos">Créditos:</label>
-        <input type="text" id="creditos" name="creditos" required value="<?php echo $asignatura['creditos']; ?>">
+        <input type="text" id="creditos" name="creditos" required value="<?php echo htmlspecialchars($asignatura['creditos']); ?>">
         <label for="convocatorias_usadas">Convocatorias Usadas:</label>
-        <input type="text" id="convocatorias_usadas" name="convocatorias_usadas" required value="<?php echo $asignatura['convocatorias_usadas']; ?>">
+        <input type="text" id="convocatorias_usadas" name="convocatorias_usadas" required value="<?php echo htmlspecialchars($asignatura['convocatorias_usadas']); ?>">
         <label for="año">Año:</label>
-        <input type="text" id="año" name="año" required value="<?php echo $asignatura['año']; ?>">
+        <input type="text" id="año" name="año" required value="<?php echo htmlspecialchars($asignatura['año']); ?>">
         <button type="submit">Editar</button>
     </form>
 </div>

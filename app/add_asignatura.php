@@ -19,9 +19,9 @@ $dni = $_SESSION['dniUsuario'];
 $año = $_POST['año'];
 
 // Consulta parametrizada para insertar asignatura
-$query = "INSERT INTO asignaturas (nombre, descripcion, creditos, convocatorias_usadas, año, dni) VALUES (?, ?, ?, ?, ?, ?)";
+$query = "INSERT INTO asignaturas (nombre, descripcion, creditos, convocatorias_usadas, dni, año) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($query);
-$stmt->bind_param("ssissi", $nombre, $descripcion, $creditos, $convocatorias_usadas, $año, $dni);
+$stmt->bind_param("ssiisi", $nombre, $descripcion, $creditos, $convocatorias_usadas, $dni, $año);
 $stmt->execute();
 
 if ($stmt->affected_rows > 0) {

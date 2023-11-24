@@ -12,6 +12,7 @@ $conn = mysqli_connect($hostname, $username, $password, $db);
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
+
 $dni = $_SESSION['dniUsuario'];
 
 $query = "SELECT nombre, apellidos, telefono, fechaNacimiento, password FROM usuarios WHERE dni = ?";
@@ -41,22 +42,22 @@ if ($result) {
     <h1>Editar usuario</h1>
     <form id="registerForm" action="modify_usuario.php" method="post">
     	
-    	<input type="hidden" name="dni" value="<?php echo $dni; ?>">
+    	<input type="hidden" name="dni" value="<?php echo htmlspecialchars($dni); ?>">
     	
         <label for="nombre">NOMBRE:</label>
-        <input type="text" id = "nombre" name="nombre" value="<?php echo $usuario['nombre']; ?>">
+        <input type="text" id = "nombre" name="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>">
        
         <label for="apellidos">APELLIDOS:</label>
-	    <input type="text" id="apellidos" name="apellidos" required value="<?php echo $usuario['apellidos']; ?>">
+	    <input type="text" id="apellidos" name="apellidos" required value="<?php echo htmlspecialchars($usuario['apellidos']); ?>">
         
         <label for="telefono">TELEFONO:</label>
-        <input type="text" id="telefono" name="telefono" required pattern= "[0-9]{9}" required value="<?php echo $usuario['telefono']; ?>">
+        <input type="text" id="telefono" name="telefono" required pattern= "[0-9]{9}" required value="<?php echo htmlspecialchars($usuario['telefono']); ?>">
         
         <label for="fechaNacimiento">FECHA NACIMIENTO:</label>
-        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required value="<?php echo $usuario['fechaNacimiento']; ?>">
+        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required value="<?php echo htmlspecialchars($usuario['fechaNacimiento']); ?>">
         
         <label for="password">CONTRASEÑA:</label>
-        <input type="password" id="password" name="password" required value="<?php echo $usuario['password']; ?>">
+        <input type="password" id="password" name="password" required value="<?php echo htmlspecialchars($usuario['password']); ?>">
         <button type="submit">Editar</button>
     </form>
 </div>

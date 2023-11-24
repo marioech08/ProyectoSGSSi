@@ -22,6 +22,20 @@ function validateDNI(dni) {
     return false;
 }
 
+function esPasswordSegura(password) {
+    return password.length >= 8 &&
+           /[A-Z]/.test(password) && // Al menos una letra mayúscula
+           /[a-z]/.test(password) && // Al menos una letra minúscula
+           /[0-9]/.test(password) && // Al menos un número
+           /[\W]/.test(password);    // Al menos un carácter especial
+}
+
+function esPasswordComun(password) {
+    $comunPasswords = file('WorstPasswordList.txt', FILE_IGNORE_NEW_LINES);
+    return in_array($password, $comunPasswords);
+}
+
+
 
 let editButtons = document.querySelectorAll('.edit-asignatura');
 let modal = document.getElementById('editModal');
@@ -35,6 +49,8 @@ editButtons.forEach(function(button) {
         modal.style.display = 'block';
     });
 });
+
+
 
 closeBtn.addEventListener('click', function() {
     modal.style.display = 'none';

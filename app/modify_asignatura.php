@@ -1,6 +1,5 @@
 <?php
 session_start();
-// phpinfo();
 $hostname = "db";
 $username = "admin";
 $password = "test";
@@ -16,20 +15,26 @@ $nombre = $_POST['nombre'];
 $descripcion = $_POST['descripcion'];
 $creditos = $_POST['creditos'];
 $convocatorias_usadas = $_POST['convocatorias_usadas'];
-$año =$_POST['año'];
+$año = $_POST['año'];
 $dni = $_SESSION['dniUsuario'];
 
+$query = "UPDATE asignaturas SET nombre=?, descripcion=?, creditos=?, convocatorias_usadas=?, año=? WHERE id=? AND dni=?";
+$stmt = mysqli_prepare($conn, $query);
 
+if ($stmt) {
+    mysqli_stmt_bind_param($stmt, "sssssss", $nombre, $descripcion, $creditos, $convocatorias_usadas, $año, $asignatura_id, $dni);
+    $result = mysqli_stmt_execute($stmt);
 
-$query = "UPDATE asignaturas SET nombre = '$nombre', descripcion = '$descripcion', creditos = '$creditos', convocatorias_usadas = '$convocatorias_usadas', año = '$año' WHERE id = '$asignatura_id' AND dni = '$dni'";
-$result = mysqli_query($conn, $query);
+    if ($result) {
+        header('Location: dashboard.php');
+    } else {
+        header('Location: dashboard.php?error=modify_asignatura_failed');
+    }
 
-if ($result) {
-    header('Location: dashboard.php');
+    mysqli_stmt_close($stmt);
 } else {
-    header('Location: dashboard.php?error=modify_asignatura_failed');
+    echo "Error in preparing statement: " . mysqli_error($conn);
 }
 
 mysqli_close($conn);
 ?>
-

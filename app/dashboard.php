@@ -72,8 +72,16 @@ mysqli_close($conn);
     <form action="logout.php">
         <button class="cerrar-sesion">Cerrar Sesion</button>
     </form>
-    <button class="edit-usuario" onclick="window.location.href='editar_usuario.php'">Editar Usuario</button>
-    <button class="add-asignatura" onclick="window.location.href='add_asignatura.html'">Añadir Asignatura</button>
+    <!-- Formulario para Editar Usuario -->
+    <form action="editar_usuario.php" method="POST">
+        <button type="submit" class="edit-usuario">Editar Usuario</button>
+    </form>
+
+    <!-- Formulario para Añadir Asignatura -->
+    <form action="add_asignatura.html" method="GET">
+        <button type="submit" class="add-asignatura">Añadir Asignatura</button>
+    </form>
+
     <div class="asignaturas-list">
         <?php foreach ($asignaturas as $asignatura): ?>
             <div class="container-asignatura">
@@ -97,13 +105,16 @@ mysqli_close($conn);
                 </div>
                 <span class="asignatura-actions">
                     <form action="edit_asignatura.php" method="post" class="edit_asignatura">
-                        <input type="hidden" name="asignatura_id" value="<?php echo $asignatura['id']; ?>">
+                        <input type="hidden" name="asignatura_id"
+                            value="<?php echo htmlspecialchars($asignatura['id']); ?>">
                         <button type="submit" class="edit-asignatura">
                             <img class="edit-icon" src="edit.png">
                         </button>
                     </form>
-                    <form action="delete_asignatura.php" method="post" class="delete-form" onsubmit="return confirm('¿Seguro que quieres eliminar esta asignatura?');">
-                        <input type="hidden" name="asignatura_id" value="<?php echo $asignatura['id']; ?>">
+                    <form action="delete_asignatura.php" method="post" class="delete-form"
+                        onsubmit="return confirm('¿Seguro que quieres eliminar esta asignatura?');">
+                        <input type="hidden" name="asignatura_id"
+                            value="<?php echo htmlspecialchars($asignatura['id']); ?>">
                         <button type="submit" class="delete-asignatura"></button>
                     </form>
                 </span>
@@ -112,4 +123,5 @@ mysqli_close($conn);
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
