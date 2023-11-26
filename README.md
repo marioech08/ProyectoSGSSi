@@ -10,7 +10,7 @@
 ## Como abrir el proyecto
 Clonamos el proyecto con:
 ```bash
-$ git clone -b entrega_1 https://github.com/marioech08/ProyectoSGSSi
+$ git clone -b entrega_2 https://github.com/marioech08/ProyectoSGSSi
 ```
 Situamos la terminal dentro de la carpeta donde esta el proyecto.
 
@@ -40,7 +40,7 @@ Inicia sesión con las siguientes credenciales:
     Contraseña: test
 
 Haz clic en database y luego selecciona importar. Después, elige el archivo database.sql situado en la carpeta del proyecto. Esta base tiene un gmail:admin@gmail.com contraseña:12 con varias asignaturas añadidas.
-Accede a http://localhost:81/ en tu navegador.
+Accede a https:localhost/ en tu navegador.
 
 Si deseas detener el proyecto, abre otra terminal y ejecuta el siguiente comando:
 ```bash
