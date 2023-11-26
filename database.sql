@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db
--- Tiempo de generación: 22-10-2023 a las 14:03:41
--- Versión del servidor: 10.8.2-MariaDB-1:10.8.2+maria~focal
+-- Tiempo de generación: 26-11-2023 a las 22:26:08
+-- Versión del servidor: 11.2.2-MariaDB-1:11.2.2+maria~ubu2204
 -- Versión de PHP: 8.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -35,7 +35,7 @@ CREATE TABLE `asignaturas` (
   `convocatorias_usadas` int(11) NOT NULL,
   `año` int(11) NOT NULL,
   `dni` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `asignaturas`
@@ -63,12 +63,14 @@ CREATE TABLE `usuarios` (
   `fechaNacimiento` date NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
+INSERT INTO `usuarios` (`nombre`, `apellidos`, `dni`, `telefono`, `fechaNacimiento`, `email`, `password`) VALUES
+('Pablo', 'Martinez', '14322313Y', 123456789, '2023-11-12', 'admin@gmail.com', '$2y$10$Ty4OS6zaLiXOytIYEQo1OuYcnOuMtzjYIBqtb7jduOolHUnJ6rHRC');
 
 --
 -- Índices para tablas volcadas
