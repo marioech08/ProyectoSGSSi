@@ -1,5 +1,6 @@
 <?php
 // phpinfo();
+session_start();
 $hostname = "db";
 $username = "admin";
 $password = "test";
@@ -11,18 +12,9 @@ if (!$conn) {
 	die("Database connection failed: " . mysqli_connect_error());
 }
 
-#function esPasswordSegura($password) {
-    #return strlen($password) >= 8 && 
-           #preg_match('/[A-Z]/', $password) && 
-           #preg_match('/[a-z]/', $password) && 
-           #preg_match('/[0-9]/', $password) && 
-           #preg_match('/[\W]/', $password);
-#}
+if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
 
-#function esPasswordComun($password) {
-    #$comunPasswords = file('WorstPasswordList.txt', FILE_IGNORE_NEW_LINES);
-    #return in_array($password, $comunPasswords);
-#}
+
 
 
 
@@ -34,23 +26,19 @@ $fechaNacimiento = $_POST['fechaNacimiento'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-
-if (!(strlen($password) >= 8 && 
-preg_match('/[A-Z]/', $password) && 
-preg_match('/[a-z]/', $password) && 
-preg_match('/[0-9]/', $password) && 
-preg_match('/[\W]/', $password))) {
-	#echo '<script type="text/javascript">window.alert("La contraseña debe tener al menos 8 caracteres y debe incluir al menos una letra mayúscula, una letra minúscula, un número y al menos un carácter especial");window.location.href = "register.html";</script>';
-	echo "no es segura";
-  }
- # if (esPasswordComun($password)) {
-	  #echo '<script type="text/javascript">window.alert("La contraseña es muy común");window.location.href = "register.html";</script>';
-	  #exit;
-  #}
-//GENERACIÓN DE HASH Y SALT PARA CADA REGISTRO DE USUARIO
+function esPasswordSegura($password) {
+    return strlen($password) >= 8 && 
+           preg_match('/[A-Z]/', $password) && 
+           preg_match('/[a-z]/', $password) && 
+           preg_match('/[0-9]/', $password) && 
+           preg_match('/[\W]/', $password);
+}
 
 
-
+if (!esPasswordSegura($password)){
+	echo "no es segura la contraseña ";
+}
+else{
 
 $hashPassword = password_hash($password, PASSWORD_BCRYPT);
 
@@ -80,7 +68,7 @@ if (mysqli_num_rows($result_dni) > 0 ) {
 	if ($stmt->execute()) {
 		#echo '<script type="text/javascript">window.alert("Registro exitoso"); window.location.href = "inicio.html";</script>';
 		
-		header('Location: inicio.html');
+		header('Location: index.php');
 	} else {
 		echo "No se consiguió el registro: " . $stmt->error;
 
@@ -88,6 +76,11 @@ if (mysqli_num_rows($result_dni) > 0 ) {
 
 	$stmt->close();
 }
+}
 
+}
+else {
+    echo 'error en el token';
+}
 $conn->close();
 ?>

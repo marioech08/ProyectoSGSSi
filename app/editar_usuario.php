@@ -43,6 +43,8 @@ if ($result) {
     <form id="registerForm" action="modify_usuario.php" method="post">
     	
     	<input type="hidden" name="dni" value="<?php echo htmlspecialchars($dni); ?>">
+
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
     	
         <label for="nombre">NOMBRE:</label>
         <input type="text" id = "nombre" name="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>">
@@ -55,9 +57,7 @@ if ($result) {
         
         <label for="fechaNacimiento">FECHA NACIMIENTO:</label>
         <input type="date" id="fechaNacimiento" name="fechaNacimiento" required value="<?php echo htmlspecialchars($usuario['fechaNacimiento']); ?>">
-        
-        <label for="password">CONTRASEÑA:</label>
-        <input type="password" id="password" name="password" required value="<?php echo htmlspecialchars($usuario['password']); ?>">
+     
         <button type="submit">Editar</button>
     </form>
 </div>

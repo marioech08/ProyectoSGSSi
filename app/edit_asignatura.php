@@ -11,6 +11,8 @@ if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
 
+if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+
 $asignatura_id = $_POST['asignatura_id'];
 $dni = $_SESSION['dniUsuario'];
 
@@ -28,6 +30,9 @@ if ($result) {
     header('Location: dashboard.php?error=modify_asignatura_failed');
     exit;
 }
+} else {
+    echo 'error en el token';
+}
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +46,9 @@ if ($result) {
 <body>
 <div class="container">
     <h1>Editar una asignatura</h1>
-    <form action="modify_asignatura.php" method="post">
+    <form action="modify_asignatura.php" method="POST">
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+
         <input type="hidden" name="asignatura_id" value="<?php echo htmlspecialchars($asignatura_id); ?>">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required value="<?php echo htmlspecialchars($asignatura['nombre']); ?>">

@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Registro en la Plataforma de Asignaturas</h1>
         
-        <form id="registerForm" action="register.php" method="post">
+        <form id="registerForm" action="register.php" method="POST">
 
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required placeholder="Escriba su nombre" required>
@@ -38,6 +38,8 @@
 
             <label for="password">Contraseña</label>
             <input type="password" id="password" name="password" placeholder="Escriba una contraseña" required>
+
+            <input type="hidden" name="csrf_token" value="<?php session_start(); echo $_SESSION['csrf_token']; ?>">
             
             <button type="submit">Registrarse</button>  
         </form>

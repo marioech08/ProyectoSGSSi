@@ -8,7 +8,7 @@
 - Eneko Uresandi
 
 ## Como abrir el proyecto
-Clonamos el pr
+Clonamos el proyecto con:
 ```bash
 $ git clone -b entrega_1 https://github.com/marioech08/ProyectoSGSSi
 ```

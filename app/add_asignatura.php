@@ -11,6 +11,8 @@ if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
 
+if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+
 $nombre = $_POST['nombre'];
 $descripcion = $_POST['descripcion'];
 $creditos = $_POST['creditos'];
@@ -32,4 +34,8 @@ if ($stmt->affected_rows > 0) {
 
 $stmt->close();
 mysqli_close($conn);
+
+} else {
+    echo 'error en el token';
+}
 ?>

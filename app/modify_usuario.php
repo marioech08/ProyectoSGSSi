@@ -1,4 +1,5 @@
 <?php
+session_start();
 $hostname = "db";
 $username = "admin";
 $password = "test";
@@ -8,6 +9,9 @@ $conn = mysqli_connect($hostname, $username, $password, $db);
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
+
+if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+
 
 $nombre = $_POST['nombre'];
 $apellidos = $_POST['apellidos'];
@@ -32,6 +36,9 @@ if ($stmt) {
     mysqli_stmt_close($stmt);
 } else {
     echo "Error in preparing statement: " . mysqli_error($conn);
+}
+}else {
+    echo 'error en el token';
 }
 
 mysqli_close($conn);

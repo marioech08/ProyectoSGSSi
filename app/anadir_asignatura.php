@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Añadir una asignatura</h1>
         
-        <form action="add_asignatura.php" method="post" enctype="multipart/form-data">   
+        <form action="add_asignatura.php" method="POST" enctype="multipart/form-data">   
            
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
@@ -27,6 +27,9 @@
             <label for="año">Año:</label>
             <input type="text" name="año" id="año" required>
 
+            <input type="hidden" name="csrf_token" value="<?php session_start(); echo $_SESSION['csrf_token']; ?>">
+
+        
             <button type="submit">Añadir</button>
         </form>
     </div>
