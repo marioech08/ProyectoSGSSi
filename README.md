@@ -21,7 +21,7 @@ $ apt-get install docker
 
 Crea la imagen llamada "web" ejecutando el siguiente comando:
 ```bash
-$ docker build -t="web" .
+$ sudo docker build -t="web" .
 ```
 
 Inicia los contenedores con el siguiente comando:
